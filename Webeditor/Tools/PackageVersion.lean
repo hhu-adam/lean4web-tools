@@ -35,9 +35,9 @@ def getPackageVersions : IO String := do
   | some manifest =>
     let out := out.append <| Array.toList <| manifest.packages.map (fun p =>
       match p with
-      | .path name _ _ _ =>
+      | .path name _ _ _ _ =>
         s!"{name}:\nlocal package"
-      | .git name _ _ url rev _ _ =>
+      | .git name _ _ _ url rev _ _ =>
         let rev := rev.slice 0 7
         s!"{name}:\n{rev}\n{url}/commits/{rev}")
     return "\n\n".intercalate out
