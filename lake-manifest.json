@@ -1,5 +1,4 @@
-{"version": 7,
- "packagesDir": ".lake/packages",
+{"version": 6,
+ "packagesDir": "lake-packages",
  "packages": [],
- "name": "webeditor",
- "lakeDir": ".lake"}
+ "name": "webeditor"}
