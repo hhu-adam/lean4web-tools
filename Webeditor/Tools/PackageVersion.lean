@@ -38,7 +38,7 @@ def getPackageVersions : IO String := do
       | .path name _ _ _ _ =>
         s!"{name}:\nlocal package"
       | .git name _ _ _ url rev _ _ =>
-        let rev := rev.slice 0 7
+        let rev := rev.slice 0 8
         s!"{name}:\n{rev}\n{url}/commits/{rev}")
     return "\n\n".intercalate out
 
