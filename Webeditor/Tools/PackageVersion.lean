@@ -22,7 +22,7 @@ def slice (s : String) (start := 0) (stop := s.length) : String := Substring.toS
 
 end String
 
-/-- Read the `lake-manifest.jsoin` -/
+/-- Read the `lake-manifest.json` -/
 def getPackageVersions : IO String := do
 
   -- Get the Lean version
@@ -34,12 +34,12 @@ def getPackageVersions : IO String := do
     return "\n\n".intercalate out
   | some manifest =>
     let out := out.append <| Array.toList <| manifest.packages.map (fun p =>
-      match p with
-      | .path name _ _ _ _ =>
-        s!"{name}:\nlocal package"
-      | .git name _ _ _ url rev _ _ =>
+      match p.src with
+      | .path _ =>
+        s!"{p.name}:\nlocal package"
+      | .git url rev _ _ =>
         let rev := rev.slice 0 8
-        s!"{name}:\n{rev}\n{url}/commits/{rev}")
+        s!"{p.name}:\n{rev}\n{url}/commits/{rev}")
     return "\n\n".intercalate out
 
 /-- Print the lean version and all available packages. -/
